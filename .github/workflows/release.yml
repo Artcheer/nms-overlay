@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    # O overlay usa APIs do Windows (hotkey global F8/F9 e click-through via
+    # user32), portanto o binario so faz sentido para Windows.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt pyinstaller
+      - run: pyinstaller NMSOverlay.spec
+      - name: Renomear artefato
+        run: mv dist/NMS-Overlay.exe dist/NMS-Overlay-windows-x64.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NMS-Overlay-Windows
+          path: dist/NMS-Overlay-windows-x64.exe
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: NMS-Overlay-Windows
+          path: dist
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/NMS-Overlay-windows-x64.exe
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
