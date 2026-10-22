@@ -1,7 +1,7 @@
 # NMS Endgame Overlay
 
 Overlay de checklist endgame do **No Man's Sky** que roda por cima do jogo
-e sincroniza com o checklist no **Obsidian**. Marque missões sem sair do
+e sincroniza com seu checklist em **Markdown**. Marque missões sem sair do
 jogo — o `[x]` é salvo direto de volta no `.md`.
 
 > Funciona com o jogo em modo **janela sem bordas**. Tela cheia exclusiva
@@ -35,18 +35,18 @@ a janela do jogo, destrava e foca o overlay; apertando de novo, o foco
 volta ao jogo e a trava anterior é restaurada. Ambas as teclas podem
 ser trocadas no menu `⋯`.
 
-## Checklist no Obsidian
+## Checklist em Markdown
 
 O overlay lê os tópicos direto do `.md` e salva o `[x]` de volta nele:
 
 - Seções são os `## `, subtítulos os `### `, itens os `- [ ]` / `- [x]`.
 - Backup automático em `.bak` antes da primeira escrita da sessão.
-- Se o arquivo mudar no Obsidian enquanto você marca algo, o overlay
+- Se o arquivo mudar em outro editor enquanto você marca algo, o overlay
   recarrega, preserva sua marcação e avisa ("mesclado e salvo").
 - Caminho padrão: checklist embutido em `checklist/nms-endgame-checklist.md`.
   Dá para trocar pelo diálogo de arquivo na primeira abertura, ou apontando
-  `md_path` para um `.md` da sua vault no Obsidian (ex.: a versão com
-  checkboxes `[x]` guardados lá).
+  `md_path` para qualquer `.md` seu — inclusive uma cópia com checkboxes
+  `[x]` guardados que você mantém separado do repositório.
 
 ## Configuração (`overlay_config.json`)
 
@@ -55,7 +55,7 @@ estado trava/livre, tecla, missão em foco e última visão (overview/seção).
 
 | Chave | Padrão | Descrição |
 |---|---|---|
-| `md_path` | `checklist/nms-endgame-checklist.md` | Arquivo `.md` do checklist (pode apontar para o seu Obsidian) |
+| `md_path` | `checklist/nms-endgame-checklist.md` | Arquivo `.md` do checklist (qualquer editor) |
 | `opacity` | `0.88` | Transparência **do fundo** (25–100%) |
 | `width` / `height` | `340` / `480` | Tamanho da janela |
 | `locked` | `false` | Começar travado |
@@ -101,7 +101,7 @@ venv\Scripts\python.exe test_overlay.py
 ```
 
 Roda headless (offscreen): posição, arrasto, toggle/save/backup, merge do
-Obsidian, slider, rolagem, busca, overview, trava/hotkey, click-through,
+merge externo, slider, rolagem, busca, overview, trava/hotkey, click-through,
 watchdog, fechar, foco e visão persistida. Esperado: `TEST-OK geral.`
 
 ## Problemas comuns
@@ -124,9 +124,9 @@ GitHub Actions e publicada na aba Releases:
 
 Não é preciso Python: o checklist embutido já vem dentro. A config
 (`overlay_config.json` + posições/teclas) é criada ao lado do `.exe` na
-primeira execução. Ainda recomendo apontar `md_path` para o seu `.md` do
-Obsidian para continuar sincronizando seu progresso — o executável inclui
-o checklist apenas como padrão inicial.
+primeira execução. Para continuar seu progresso de verdade, aponte `md_path`
+para o seu arquivo de checklist — o executável inclui o embutido apenas
+como padrão inicial.
 
 > O binário é somente Windows: o overlay depende de APIs do sistema
 > (`user32`) para hotkey global e click-through, que não existem no Linux.
