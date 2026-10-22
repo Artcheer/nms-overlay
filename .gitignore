@@ -15,6 +15,9 @@ overlay_config.json
 nms_overlay.py.atlasbak
 *.bak
 
+# Utilidades locais (script de capturas do README; fica fora do repo)
+tools/
+
 # Empacotamento
 dist/
 build/

@@ -13,8 +13,7 @@ jogo — o `[x]` é salvo direto de volta no `.md`.
 |:---:|:---:|
 | ![Busca no checklist](docs/imgs/03-busca.png) | ![Cartão de foco](docs/imgs/04-foco.png) |
 
-*Overview das seções · Checklist por seção · Busca · Modo foco — capturas
-geradas com `tools/gerar_prints.py`.*
+*Overview das seções · Checklist por seção · Busca · Modo foco.*
 
 ## Como usar
 
@@ -92,8 +91,6 @@ nms-overlay/
 ├── checklist/               # checklist embutido (padrão, sem progresso)
 │   └── nms-endgame-checklist.md
 ├── docs/imgs/               # capturas usadas no README
-├── tools/                   # utilidades
-│   └── gerar_prints.py      # gera as capturas acima (sem abrir o jogo)
 ├── test_overlay.py          # suite headless (rodar com o venv)
 └── requirements.txt         # PySide6>=6.6
 ```
